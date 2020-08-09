@@ -1,6 +1,5 @@
 package loremipsum;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +9,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
- * Clase encargada de hacer la llamada HTTP a lipsum.com y extraer los párrafos
+ * Clase encargada de hacer la llamada HTTP a lipsum.com y extraer los párrafos.
+ * Cuando se instancia la clase, instantáneamente se hace la llamada.
  **/
 
 public class HTTPRequestLoremIpsum {
