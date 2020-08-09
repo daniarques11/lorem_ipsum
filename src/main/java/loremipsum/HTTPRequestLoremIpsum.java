@@ -9,21 +9,26 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-/** Clase encargada de hacer la llamada HTTP a lipsum.com y extraer los párrafos **/
+/**
+ * Clase encargada de hacer la llamada HTTP a lipsum.com y extraer los párrafos
+ **/
 
 public class HTTPRequestLoremIpsum {
-	
-	public static List<String> paragraphs = new ArrayList<String>();
 
-	public static void main(String[] args) throws IOException {
+	public List<String> paragraphs = new ArrayList<String>();
 
-		Document doc = Jsoup.connect("https://es.lipsum.com/feed/html").get();
-		Elements elements = doc.select("#lipsum p");
+	public HTTPRequestLoremIpsum() {
 
-		for (Element element : elements) {
-			paragraphs.add(element.text());
-			System.out.println(element.text());
+		try {
+			Document doc = Jsoup.connect("https://es.lipsum.com/feed/html").get();
+			Elements elements = doc.select("#lipsum p");
+
+			for (Element element : elements) {
+				paragraphs.add(element.text());
+			}
+			
+		} catch (Exception e) {
+			System.out.println("No se ha podido conectar con lipsum.com");
 		}
-		System.out.println(paragraphs);
 	}
 }
