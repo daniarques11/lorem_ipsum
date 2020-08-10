@@ -103,6 +103,7 @@ public class Crawler {
 		return wordFreqMap;
 	}
 
+	// Encuentra las 5 primeras palabras mas freqüentes
 	private HashMap<String, Integer> mostFrequentWords() {
 		HashMap<String, Integer> mostFreqMap = new HashMap<String, Integer>();
 		HashMap<String, Integer> mapCopy = new HashMap<String,Integer>(wordFreqMap);
@@ -115,6 +116,7 @@ public class Crawler {
 		return mostFreqMap;
 	}
 
+	// Encuentra la palabra mas freqüente del conjunto
 	private String mostFrequentWord(HashMap<String, Integer> map) {
 		// Encontramos el valor maximo
 		int max = 0;
@@ -132,6 +134,7 @@ public class Crawler {
 		return "";
 	}
 
+	
 	boolean isPalindrome(String word) {
 		int i = 0;
 		int j = word.length() - 1;
