@@ -33,6 +33,9 @@ public class Crawler {
 		return getWordList().size();
 	}
 
+	public int getPalindromeCount() {
+		return getPalindromeList().size();
+	}
 	// Método encargado de hacer split en cada párrafo para obtener una lista de las frases
 	public ArrayList<String> getPhrasesList() {
 		ArrayList<String> phrasesList = new ArrayList<String>();
@@ -53,9 +56,8 @@ public class Crawler {
 	// Método encargado de hacer split en cada frase para obtener la lista de palabras.
 	public ArrayList<String> getWordList(){
 		ArrayList<String> wordsList = new ArrayList<String>();
-		ArrayList<String> phrasesList = getPhrasesList();
 		
-		for(String phrase : phrasesList) {
+		for(String phrase : getPhrasesList()) {
 			String[] words = phrase.split(" ");
 			for (String word : words) {
 				String wordTrimmed = totalTrim(word);
@@ -69,7 +71,16 @@ public class Crawler {
 		
 	}
 	
-	
+	// Método encargado de recoger las palabras que son palíndromas
+	public ArrayList<String> getPalindromeList(){
+		ArrayList<String> palindromeList = new ArrayList<String>();
+		for (String word : getWordList()) {
+			if (isPalindrome(word)) {
+				palindromeList.add(word);
+			}
+		}
+		return palindromeList;
+	}
 	
 	boolean isPalindrome(String word) {
 		int i = 0;
@@ -79,6 +90,8 @@ public class Crawler {
 			if(lowerCaseWord.charAt(i) != lowerCaseWord.charAt(j)) {
 				return false;
 			};
+			i++;
+			j--;
 		}
 		return true;
 	}

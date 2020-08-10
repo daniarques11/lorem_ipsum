@@ -1,6 +1,7 @@
 package loremipsum;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 
 import java.util.ArrayList;
@@ -74,5 +75,7 @@ public class CrawlerTest {
 	public void isPalindromeTest() {
 		Crawler crawler = new Crawler(testNormal);
 		assert(crawler.isPalindrome("hooh"));
+		assert(crawler.isPalindrome("hoh"));
+		assertFalse(crawler.isPalindrome("hola"));
 	}
 }
