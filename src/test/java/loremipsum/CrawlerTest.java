@@ -78,4 +78,16 @@ public class CrawlerTest {
 		assert(crawler.isPalindrome("hoh"));
 		assertFalse(crawler.isPalindrome("hola"));
 	}
+	
+	@Test
+	public void palindromeCountTest() {
+		Crawler crawler = new Crawler(testNormal);
+		assertEquals(crawler.getPalindromeCount(), 8);
+		
+		crawler.setParagraphs(testEmpty);
+		assertEquals(crawler.getPalindromeCount(), 0);
+		
+		crawler.setParagraphs(testRequest);
+		assertNotEquals(crawler.getWordCount(), 0);
+	}
 }

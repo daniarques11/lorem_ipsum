@@ -4,11 +4,20 @@ import java.util.ArrayList;
 
 public class Crawler {
 
-	private ArrayList<String> paragraphs;
+	public ArrayList<String> paragraphs;
+	public ArrayList<String> phrases;
+	public ArrayList<String> words;
+	public ArrayList<String> palindromes;
+
+
 
 	// Constructor
 	public Crawler(ArrayList<String> paragraphs) {
 		this.paragraphs = paragraphs;
+		this.phrases = getPhrasesList();
+		this.words = getWordList();
+		this.palindromes = getPalindromeList();
+		
 	}
 
 	void setParagraphs(ArrayList<String> paragraphs) {
@@ -26,18 +35,18 @@ public class Crawler {
 	}
 
 	public int getPhraseCount() {
-		return getPhrasesList().size();
+		return phrases.size();
 	}
 	
 	public int getWordCount() {
-		return getWordList().size();
+		return words.size();
 	}
 
 	public int getPalindromeCount() {
-		return getPalindromeList().size();
+		return palindromes.size();
 	}
 	// Método encargado de hacer split en cada párrafo para obtener una lista de las frases
-	public ArrayList<String> getPhrasesList() {
+	private ArrayList<String> getPhrasesList() {
 		ArrayList<String> phrasesList = new ArrayList<String>();
 		
 		for (String paragraph : paragraphs) {
@@ -54,10 +63,10 @@ public class Crawler {
 	}
 
 	// Método encargado de hacer split en cada frase para obtener la lista de palabras.
-	public ArrayList<String> getWordList(){
+	private ArrayList<String> getWordList(){
 		ArrayList<String> wordsList = new ArrayList<String>();
 		
-		for(String phrase : getPhrasesList()) {
+		for(String phrase : phrases) {
 			String[] words = phrase.split(" ");
 			for (String word : words) {
 				String wordTrimmed = totalTrim(word);
@@ -66,15 +75,14 @@ public class Crawler {
 				}
 			}
 		}
-		System.out.println(wordsList);
 		return wordsList;
 		
 	}
 	
 	// Método encargado de recoger las palabras que son palíndromas
-	public ArrayList<String> getPalindromeList(){
+	private ArrayList<String> getPalindromeList(){
 		ArrayList<String> palindromeList = new ArrayList<String>();
-		for (String word : getWordList()) {
+		for (String word : words) {
 			if (isPalindrome(word)) {
 				palindromeList.add(word);
 			}
