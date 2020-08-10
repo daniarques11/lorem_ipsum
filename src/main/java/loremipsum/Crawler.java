@@ -16,7 +16,13 @@ public class Crawler {
 	}
 
 	public int getParagraphCount() {
-		return paragraphs.size();
+		int count = 0;
+		for (String paragraph : paragraphs) {
+			if(!totalTrim(paragraph).isEmpty()) {
+				count++;
+			}
+		}
+		return count;
 	}
 
 	public int getPhrasesCount() {
@@ -43,7 +49,7 @@ public class Crawler {
 	// Se encarga de eliminar espacios en blanco antes y despues de la frase y de eliminar los puntos
 	String totalTrim(String str) {
 		str = str.trim();
-		str = str.replaceAll("\\.", "");
+		str = str.replaceAll("[\\.!?]", "");
 		return str;
 	}
 }
