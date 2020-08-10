@@ -16,6 +16,8 @@ public class Crawler {
 	public ArrayList<String> palindromes;
 	public HashMap<String, Integer> wordFreqMap;
 	public HashMap<String, Integer> tupleFreqMap;
+	public HashMap<String, Integer> mostFreqWords;
+	private HashMap<String, Integer> mostFreqTuples;
 
 	// Constructor
 	public Crawler(ArrayList<String> paragraphs) {
@@ -25,6 +27,8 @@ public class Crawler {
 		this.palindromes = getPalindromeList();
 		this.wordFreqMap = getWordFrequency();
 		this.tupleFreqMap = getTupleFrequency();
+		this.mostFreqWords = getMostFrequentWords();
+		this.mostFreqTuples = getMostFrequentTuples();
 	}
 
 	public int getParagraphCount() {
@@ -50,7 +54,11 @@ public class Crawler {
 	}
 
 	public HashMap<String, Integer> getMostFrequentWords() {
-		return mostFrequentWords();
+		return mostFrequentKeys(wordFreqMap);
+	}
+	
+	public HashMap<String, Integer> getMostFrequentTuples() {
+		return mostFrequentKeys(tupleFreqMap);
 	}
 
 	// Método encargado de hacer split en cada párrafo para obtener una lista de las
@@ -110,12 +118,12 @@ public class Crawler {
 	}
 
 	// Encuentra las 5 primeras palabras mas freqüentes
-	private HashMap<String, Integer> mostFrequentWords() {
+	private HashMap<String, Integer> mostFrequentKeys(HashMap<String, Integer> map) {
 		HashMap<String, Integer> mostFreqMap = new HashMap<String, Integer>();
-		HashMap<String, Integer> mapCopy = new HashMap<String, Integer>(wordFreqMap);
+		HashMap<String, Integer> mapCopy = new HashMap<String, Integer>(map);
 
 		while (!mapCopy.isEmpty() && mostFreqMap.size() < 5) {
-			String freqWord = mostFrequentWord(mapCopy);
+			String freqWord = mostFrequentKey(mapCopy);
 			mostFreqMap.put(freqWord, mapCopy.get(freqWord));
 			mapCopy.remove(freqWord);
 		}
@@ -123,7 +131,7 @@ public class Crawler {
 	}
 
 	// Encuentra la palabra mas freqüente del conjunto
-	private String mostFrequentWord(HashMap<String, Integer> map) {
+	private String mostFrequentKey(HashMap<String, Integer> map) {
 		// Encontramos el valor maximo
 		int max = 0;
 		for (int value : map.values()) {
@@ -140,6 +148,7 @@ public class Crawler {
 		return "";
 	}
 
+	// Creamos las tuplas y las almacenamos en un mapa
 	private HashMap<String, Integer> getTupleFrequency() {
 		HashMap<String, Integer> tupleMap = new HashMap<String, Integer>();
 		int i = 1;
@@ -148,6 +157,7 @@ public class Crawler {
 			tupleMap.compute(tuple, (key, value) -> (value == null) ? 1 : value + 1);
 		i++;
 		}
+		System.out.println(tupleMap);
 		return tupleMap;
 	}
 
@@ -174,6 +184,7 @@ public class Crawler {
 		return str;
 	}
 
+	// Concatenamos las palabras separadas por coma para crear la pareja
 	String convertToTuple(String first, String second) {
 		return first + ", " + second;
 	}

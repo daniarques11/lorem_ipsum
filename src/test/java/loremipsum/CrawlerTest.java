@@ -109,6 +109,7 @@ public class CrawlerTest {
 		Crawler crawler = new Crawler(testNormal);
 		assert (crawler.tupleFreqMap.get("hola, hola") == 3);
 		assert (crawler.tupleFreqMap.get("hi, bye") == 2);
-
+		assert (crawler.tupleFreqMap.get("hi, hi") == 3);
+		
 	}
 }
