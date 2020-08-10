@@ -6,7 +6,8 @@ public class Main {
 		HTTPRequestLoremIpsum request = new HTTPRequestLoremIpsum();
 
 		if (request.paragraphs.size() != 0) {
-			System.out.printf("Frases: %d %nPalabras: %d %nPárrafos: %d %n", 0, 0, 0);
+			Crawler crawler = new Crawler(request.paragraphs);
+			System.out.printf("Frases: %d %nPalabras: %d %nPárrafos: %d %n", 0, 0, crawler.getParagraphCount());
 			System.out.printf("Palabras palíndromas (%d): %n", 5);
 			System.out.println("_palindromos_");
 			System.out.printf("Palabras más repetidas (%d): %n", 4);

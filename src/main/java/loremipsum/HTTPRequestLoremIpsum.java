@@ -1,7 +1,6 @@
 package loremipsum;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,7 +14,7 @@ import org.jsoup.select.Elements;
 
 public class HTTPRequestLoremIpsum {
 
-	public List<String> paragraphs = new ArrayList<String>();
+	public ArrayList<String> paragraphs = new ArrayList<String>();
 
 	public HTTPRequestLoremIpsum() {
 
