@@ -11,9 +11,10 @@ import org.junit.Test;
 
 import loremipsum.Crawler;
 
-/** 
- * Casos test. Todo se testea sobre el array "testNormal", ya que abarca muchos bugs posibles.
- * **/
+/**
+ * Casos test. Todo se testea sobre el array "testNormal", ya que abarca muchos
+ * bugs posibles.
+ **/
 public class CrawlerTest {
 
 	private static ArrayList<String> testNormal = new ArrayList<String>();
@@ -30,6 +31,8 @@ public class CrawlerTest {
 		testNormal.add("     ");
 		testNormal.add(".");
 
+		// Hacemos la llamada. Si fracasa, muchos casos test fallaran porque tienen en
+		// cuenta que nos llegara el texto de la página web
 		HTTPRequestLoremIpsum req = new HTTPRequestLoremIpsum();
 		testRequest = req.paragraphs;
 

@@ -1,13 +1,13 @@
 package loremipsum;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**
  * Esta clase se encarga de recorrer el texto y hacer las operaciones
  * pertinentes con él
  **/
+
 public class Crawler {
 
 	private ArrayList<String> paragraphs;
@@ -19,7 +19,8 @@ public class Crawler {
 	private HashMap<String, Integer> mostFreqWords;
 	private HashMap<String, Integer> mostFreqTuples;
 
-	// Constructor
+	// Constructor. Inicializa todas las propiedades de la clase mediante los
+	// setters.
 	public Crawler(ArrayList<String> paragraphs) {
 		this.paragraphs = paragraphs;
 		setPhrasesList();
@@ -31,10 +32,10 @@ public class Crawler {
 		setMostFrequentTuples();
 	}
 
-	public ArrayList<String> getParagraphs(){
+	public ArrayList<String> getParagraphs() {
 		return paragraphs;
 	}
-	
+
 	public int getParagraphCount() {
 		int count = 0;
 		for (String paragraph : paragraphs) {
@@ -53,43 +54,45 @@ public class Crawler {
 		return words.size();
 	}
 
-	public ArrayList<String> getPalindromes(){
+	public ArrayList<String> getPalindromes() {
 		return palindromes;
 	}
-	
+
 	public int getPalindromeCount() {
 		return palindromes.size();
 	}
-	
-	public HashMap<String, Integer> getWordFrequency(){
+
+	public HashMap<String, Integer> getWordFrequency() {
 		return wordFreqMap;
 	}
-	
-	public HashMap<String, Integer> getTupleFrequency(){
+
+	public HashMap<String, Integer> getTupleFrequency() {
 		return tupleFreqMap;
 	}
 
-	
-	public HashMap<String, Integer> getMostFrequentWords(){
+	public HashMap<String, Integer> getMostFrequentWords() {
 		return mostFreqWords;
 	}
-	
-	public HashMap<String, Integer> getMostFrequentTuples(){
+
+	public HashMap<String, Integer> getMostFrequentTuples() {
 		return mostFreqTuples;
 	}
 
 	public void setMostFrequentWords() {
 		this.mostFreqWords = mostFrequentKeys(wordFreqMap);
 	}
-	
+
 	public void setMostFrequentTuples() {
 		this.mostFreqTuples = mostFrequentKeys(tupleFreqMap);
 	}
-	// Método encargado de hacer split en cada párrafo para obtener una lista de las
+
+	// Método encargado de hacer split en cada párrafo para setear la lista de las
 	// frases
 	private void setPhrasesList() {
 		ArrayList<String> phrasesList = new ArrayList<String>();
 
+		// En cada párrafo, substituimos todas las ! y ? en puntos. Luego hacemos split
+		// a partir de los puntos o puntos suspensivos
 		for (String paragraph : paragraphs) {
 			paragraph = paragraph.replaceAll("[!?]", ".");
 			String[] phrases = paragraph.split("\\. |\\.\\.\\. ");
@@ -103,7 +106,7 @@ public class Crawler {
 		this.phrases = phrasesList;
 	}
 
-	// Método encargado de hacer split en cada frase para obtener la lista de
+	// Método encargado de hacer split en cada frase y setear la lista de
 	// palabras.
 	private void setWordList() {
 		ArrayList<String> wordsList = new ArrayList<String>();
@@ -179,7 +182,7 @@ public class Crawler {
 		while (i < words.size()) {
 			String tuple = convertToTuple(words.get(i - 1), words.get(i));
 			tupleMap.compute(tuple, (key, value) -> (value == null) ? 1 : value + 1);
-		i++;
+			i++;
 		}
 		this.tupleFreqMap = tupleMap;
 	}
@@ -207,7 +210,7 @@ public class Crawler {
 		return str;
 	}
 
-	// Concatenamos las palabras separadas por coma para crear la pareja
+	// Concatenamos las palabras separadas por coma para crear la tupla
 	String convertToTuple(String first, String second) {
 		return first + ", " + second;
 	}
