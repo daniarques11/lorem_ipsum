@@ -50,6 +50,7 @@ public class Crawler {
 		return phrasesList;
 	}
 
+	// Método encargado de hacer split en cada frase para obtener la lista de palabras.
 	public ArrayList<String> getWordList(){
 		ArrayList<String> wordsList = new ArrayList<String>();
 		ArrayList<String> phrasesList = getPhrasesList();
@@ -63,8 +64,23 @@ public class Crawler {
 				}
 			}
 		}
+		System.out.println(wordsList);
 		return wordsList;
 		
+	}
+	
+	
+	
+	boolean isPalindrome(String word) {
+		int i = 0;
+		int j = word.length()-1;
+		String lowerCaseWord = word.toLowerCase();
+		while (i<j) {
+			if(lowerCaseWord.charAt(i) != lowerCaseWord.charAt(j)) {
+				return false;
+			};
+		}
+		return true;
 	}
 	// Se encarga de eliminar espacios en blanco antes y despues de la frase y de eliminar los puntos
 	String totalTrim(String str) {

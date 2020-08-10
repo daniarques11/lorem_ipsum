@@ -69,4 +69,10 @@ public class CrawlerTest {
 		crawler.setParagraphs(testRequest);
 		assertNotEquals(crawler.getWordCount(), 0);
 	}
+	
+	@Test
+	public void isPalindromeTest() {
+		Crawler crawler = new Crawler(testNormal);
+		assert(crawler.isPalindrome("hooh"));
+	}
 }
