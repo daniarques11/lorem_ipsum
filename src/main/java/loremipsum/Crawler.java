@@ -144,7 +144,7 @@ public class Crawler {
 		this.wordFreqMap = wordFreqMap;
 	}
 
-	// Encuentra las 5 primeras palabras mas freqüentes
+	// Encuentra los 5 elementos mas frecuentes del mapa de frecuencia
 	private HashMap<String, Integer> mostFrequentKeys(HashMap<String, Integer> map) {
 		HashMap<String, Integer> mostFreqMap = new HashMap<String, Integer>();
 		HashMap<String, Integer> mapCopy = new HashMap<String, Integer>(map);
@@ -157,7 +157,7 @@ public class Crawler {
 		return mostFreqMap;
 	}
 
-	// Encuentra la palabra mas freqüente del conjunto
+	// Encuentra la key mas frecuente de un mapa
 	private String mostFrequentKey(HashMap<String, Integer> map) {
 		// Encontramos el valor maximo
 		int max = 0;
@@ -166,7 +166,7 @@ public class Crawler {
 				max = value;
 			}
 		}
-		// Devolvemos la palabra
+		// Devolvemos la primera key que encontremos con ese valor
 		for (String word : map.keySet()) {
 			if (map.get(word) == max) {
 				return word;
@@ -175,7 +175,8 @@ public class Crawler {
 		return "";
 	}
 
-	// Creamos las tuplas y las almacenamos en un mapa
+	// Creamos las tuplas (concatenando las dos strings) y las almacenamos en un
+	// mapa
 	private void setTupleFrequency() {
 		HashMap<String, Integer> tupleMap = new HashMap<String, Integer>();
 		int i = 1;
