@@ -1,8 +1,8 @@
 package loremipsum;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-import java.net.http.HttpRequest;
 import java.util.ArrayList;
 
 import org.junit.BeforeClass;
@@ -43,13 +43,30 @@ public class CrawlerTest {
 		crawler.setParagraphs(testRequest);
 		assertEquals(crawler.getParagraphCount(), 5);
 	}
+	
 	@Test
 	public void phrasesCountTest() {
 
 		Crawler crawler = new Crawler(testNormal);
-		assertEquals(crawler.getPhrasesCount(), 10);
+		assertEquals(crawler.getPhraseCount(), 10);
 		
 		crawler.setParagraphs(testEmpty);
-		assertEquals(crawler.getPhrasesCount(), 0);
+		assertEquals(crawler.getPhraseCount(), 0);
+		
+		crawler.setParagraphs(testRequest);
+		assertNotEquals(crawler.getPhraseCount(), 0);
+	}
+	
+	@Test
+	public void wordsCountTest() {
+
+		Crawler crawler = new Crawler(testNormal);
+		assertEquals(crawler.getWordCount(), 15);
+		
+		crawler.setParagraphs(testEmpty);
+		assertEquals(crawler.getWordCount(), 0);
+		
+		crawler.setParagraphs(testRequest);
+		assertNotEquals(crawler.getWordCount(), 0);
 	}
 }
