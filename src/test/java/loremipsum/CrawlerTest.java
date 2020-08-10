@@ -26,10 +26,9 @@ public class CrawlerTest {
 		testNormal.add("wow hola kayak,wow,level. wow! hi hi bye...");
 		testNormal.add("     ");
 		testNormal.add(".");
-		
+
 		HTTPRequestLoremIpsum req = new HTTPRequestLoremIpsum();
 		testRequest = req.paragraphs;
-
 
 	}
 
@@ -37,74 +36,79 @@ public class CrawlerTest {
 	public void paragraphCountTest() {
 		Crawler crawler = new Crawler(testNormal);
 		assertEquals(crawler.getParagraphCount(), 4);
-		
-		
+
 		Crawler crawlerEmpty = new Crawler(testEmpty);
 		assertEquals(crawlerEmpty.getParagraphCount(), 0);
-		
+
 		Crawler crawlerReq = new Crawler(testRequest);
 		assertEquals(crawlerReq.getParagraphCount(), 5);
 	}
-	
+
 	@Test
 	public void phrasesCountTest() {
 
 		Crawler crawler = new Crawler(testNormal);
 		assertEquals(crawler.getPhraseCount(), 11);
-		
+
 		Crawler crawlerEmpty = new Crawler(testEmpty);
 		assertEquals(crawlerEmpty.getPhraseCount(), 0);
-		
+
 		Crawler crawlerReq = new Crawler(testRequest);
 		assertNotEquals(crawlerReq.getPhraseCount(), 0);
 	}
-	
+
 	@Test
 	public void wordsCountTest() {
 
 		Crawler crawler = new Crawler(testNormal);
 		assertEquals(crawler.getWordCount(), 27);
-		
+
 		Crawler crawlerEmpty = new Crawler(testEmpty);
 		assertEquals(crawlerEmpty.getWordCount(), 0);
-		
+
 		Crawler crawlerReq = new Crawler(testRequest);
 		assertNotEquals(crawlerReq.getWordCount(), 0);
 	}
-	
+
 	@Test
 	public void isPalindromeTest() {
 		Crawler crawler = new Crawler(testNormal);
-		assert(crawler.isPalindrome("hooh"));
-		assert(crawler.isPalindrome("hoh"));
+		assert (crawler.isPalindrome("hooh"));
+		assert (crawler.isPalindrome("hoh"));
 		assertFalse(crawler.isPalindrome("hola"));
 	}
-	
+
 	@Test
 	public void palindromeCountTest() {
 		Crawler crawler = new Crawler(testNormal);
 		assertEquals(crawler.getPalindromeCount(), 12);
-		
+
 		Crawler crawlerEmpty = new Crawler(testEmpty);
 		assertEquals(crawlerEmpty.getPalindromeCount(), 0);
-		
-		Crawler crawlerReq = new Crawler(testRequest);
-		assertNotEquals(crawlerReq.getWordCount(), 0);
+
 	}
-	
+
 	@Test
 	public void mostFrequentWordsTest() {
 		Crawler crawler = new Crawler(testNormal);
-		assert(crawler.getMostFrequentWords().get("hola") == 6);
-		assert(crawler.getMostFrequentWords().get("hi") == 6);
-		assert(crawler.getMostFrequentWords().get("wow") == 4);
-		assert(crawler.getMostFrequentWords().get("lol") == 3);
-		assert(crawler.getMostFrequentWords().get("bye") == 2);
+		assert (crawler.getMostFrequentWords().get("hola") == 6);
+		assert (crawler.getMostFrequentWords().get("hi") == 6);
+		assert (crawler.getMostFrequentWords().get("wow") == 4);
+		assert (crawler.getMostFrequentWords().get("lol") == 3);
+		assert (crawler.getMostFrequentWords().get("bye") == 2);
 		assertFalse(crawler.getMostFrequentWords().containsKey("level"));
 		Crawler crawlerEmpty = new Crawler(testEmpty);
 		assertEquals(crawlerEmpty.getPalindromeCount(), 0);
-		
+
 		Crawler crawlerReq = new Crawler(testRequest);
 		assertNotEquals(crawlerReq.getWordCount(), 0);
+	}
+
+	@Test
+	public void getAllTuplesTest() {
+		Crawler crawler = new Crawler(testNormal);
+		assert (crawler.tupleFreqMap.get("hola, hola") == 3);
+		assert (crawler.tupleFreqMap.get("hi, bye") == 2);
+
 	}
 }
