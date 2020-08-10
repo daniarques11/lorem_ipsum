@@ -10,25 +10,25 @@ import java.util.HashMap;
  **/
 public class Crawler {
 
-	public ArrayList<String> paragraphs;
-	public ArrayList<String> phrases;
-	public ArrayList<String> words;
-	public ArrayList<String> palindromes;
-	public HashMap<String, Integer> wordFreqMap;
-	public HashMap<String, Integer> tupleFreqMap;
-	public HashMap<String, Integer> mostFreqWords;
+	private ArrayList<String> paragraphs;
+	private ArrayList<String> phrases;
+	private ArrayList<String> words;
+	private ArrayList<String> palindromes;
+	private HashMap<String, Integer> wordFreqMap;
+	private HashMap<String, Integer> tupleFreqMap;
+	private HashMap<String, Integer> mostFreqWords;
 	private HashMap<String, Integer> mostFreqTuples;
 
 	// Constructor
 	public Crawler(ArrayList<String> paragraphs) {
 		this.paragraphs = paragraphs;
-		this.phrases = getPhrasesList();
-		this.words = getWordList();
-		this.palindromes = getPalindromeList();
-		this.wordFreqMap = getWordFrequency();
-		this.tupleFreqMap = getTupleFrequency();
-		this.mostFreqWords = getMostFrequentWords();
-		this.mostFreqTuples = getMostFrequentTuples();
+		setPhrasesList();
+		setWordList();
+		setPalindromeList();
+		setWordFrequency();
+		setTupleFrequency();
+		setMostFrequentWords();
+		setMostFrequentTuples();
 	}
 
 	public int getParagraphCount() {
@@ -52,18 +52,34 @@ public class Crawler {
 	public int getPalindromeCount() {
 		return palindromes.size();
 	}
-
-	public HashMap<String, Integer> getMostFrequentWords() {
-		return mostFrequentKeys(wordFreqMap);
+	
+	public HashMap<String, Integer> getWordFrequency(){
+		return wordFreqMap;
 	}
 	
-	public HashMap<String, Integer> getMostFrequentTuples() {
-		return mostFrequentKeys(tupleFreqMap);
+	public HashMap<String, Integer> getTupleFrequency(){
+		return tupleFreqMap;
 	}
 
+	
+	public HashMap<String, Integer> getMostFrequentWords(){
+		return mostFreqWords;
+	}
+	
+	public HashMap<String, Integer> getMostFrequentTuples(){
+		return mostFreqTuples;
+	}
+
+	public void setMostFrequentWords() {
+		this.mostFreqWords = mostFrequentKeys(wordFreqMap);
+	}
+	
+	public void setMostFrequentTuples() {
+		this.mostFreqTuples = mostFrequentKeys(tupleFreqMap);
+	}
 	// Método encargado de hacer split en cada párrafo para obtener una lista de las
 	// frases
-	private ArrayList<String> getPhrasesList() {
+	private void setPhrasesList() {
 		ArrayList<String> phrasesList = new ArrayList<String>();
 
 		for (String paragraph : paragraphs) {
@@ -76,12 +92,12 @@ public class Crawler {
 				}
 			}
 		}
-		return phrasesList;
+		this.phrases = phrasesList;
 	}
 
 	// Método encargado de hacer split en cada frase para obtener la lista de
 	// palabras.
-	private ArrayList<String> getWordList() {
+	private void setWordList() {
 		ArrayList<String> wordsList = new ArrayList<String>();
 
 		for (String phrase : phrases) {
@@ -93,28 +109,28 @@ public class Crawler {
 				}
 			}
 		}
-		return wordsList;
+		this.words = wordsList;
 
 	}
 
 	// Método encargado de recoger las palabras que son palíndromas
-	private ArrayList<String> getPalindromeList() {
+	private void setPalindromeList() {
 		ArrayList<String> palindromeList = new ArrayList<String>();
 		for (String word : words) {
 			if (isPalindrome(word)) {
 				palindromeList.add(word);
 			}
 		}
-		return palindromeList;
+		this.palindromes = palindromeList;
 	}
 
 	// Método encargado de almacenar en un mapa la frecuencia de cada palabra
-	private HashMap<String, Integer> getWordFrequency() {
+	private void setWordFrequency() {
 		HashMap<String, Integer> wordFreqMap = new HashMap<String, Integer>();
 		for (String word : words) {
 			wordFreqMap.compute(word, (key, value) -> (value == null) ? 1 : value + 1);
 		}
-		return wordFreqMap;
+		this.wordFreqMap = wordFreqMap;
 	}
 
 	// Encuentra las 5 primeras palabras mas freqüentes
@@ -149,7 +165,7 @@ public class Crawler {
 	}
 
 	// Creamos las tuplas y las almacenamos en un mapa
-	private HashMap<String, Integer> getTupleFrequency() {
+	private void setTupleFrequency() {
 		HashMap<String, Integer> tupleMap = new HashMap<String, Integer>();
 		int i = 1;
 		while (i < words.size()) {
@@ -158,7 +174,7 @@ public class Crawler {
 		i++;
 		}
 		System.out.println(tupleMap);
-		return tupleMap;
+		this.tupleFreqMap = tupleMap;
 	}
 
 	boolean isPalindrome(String word) {

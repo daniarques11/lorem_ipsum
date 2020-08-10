@@ -11,6 +11,9 @@ import org.junit.Test;
 
 import loremipsum.Crawler;
 
+/** 
+ * Casos test. Todo se testea sobre el array "testNormal", ya que abarca muchos bugs posibles.
+ * **/
 public class CrawlerTest {
 
 	private static ArrayList<String> testNormal = new ArrayList<String>();
@@ -105,11 +108,11 @@ public class CrawlerTest {
 	}
 
 	@Test
-	public void getAllTuplesTest() {
+	public void mostFrequentTuplesTest() {
 		Crawler crawler = new Crawler(testNormal);
-		assert (crawler.tupleFreqMap.get("hola, hola") == 3);
-		assert (crawler.tupleFreqMap.get("hi, bye") == 2);
-		assert (crawler.tupleFreqMap.get("hi, hi") == 3);
-		
+		assert (crawler.getMostFrequentTuples().get("hola, hola") == 3);
+		assert (crawler.getMostFrequentTuples().get("hi, bye") == 2);
+		assert (crawler.getMostFrequentTuples().get("hi, hi") == 3);
+
 	}
 }
