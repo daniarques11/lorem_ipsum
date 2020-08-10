@@ -20,9 +20,6 @@ public class Crawler {
 		
 	}
 
-	void setParagraphs(ArrayList<String> paragraphs) {
-		this.paragraphs = paragraphs;
-	}
 
 	public int getParagraphCount() {
 		int count = 0;

@@ -38,11 +38,12 @@ public class CrawlerTest {
 		Crawler crawler = new Crawler(testNormal);
 		assertEquals(crawler.getParagraphCount(), 4);
 		
-		crawler.setParagraphs(testEmpty);
-		assertEquals(crawler.getParagraphCount(), 0);
 		
-		crawler.setParagraphs(testRequest);
-		assertEquals(crawler.getParagraphCount(), 5);
+		Crawler crawlerEmpty = new Crawler(testEmpty);
+		assertEquals(crawlerEmpty.getParagraphCount(), 0);
+		
+		Crawler crawlerReq = new Crawler(testRequest);
+		assertEquals(crawlerReq.getParagraphCount(), 5);
 	}
 	
 	@Test
@@ -51,11 +52,11 @@ public class CrawlerTest {
 		Crawler crawler = new Crawler(testNormal);
 		assertEquals(crawler.getPhraseCount(), 10);
 		
-		crawler.setParagraphs(testEmpty);
-		assertEquals(crawler.getPhraseCount(), 0);
+		Crawler crawlerEmpty = new Crawler(testEmpty);
+		assertEquals(crawlerEmpty.getPhraseCount(), 0);
 		
-		crawler.setParagraphs(testRequest);
-		assertNotEquals(crawler.getPhraseCount(), 0);
+		Crawler crawlerReq = new Crawler(testRequest);
+		assertNotEquals(crawlerReq.getPhraseCount(), 0);
 	}
 	
 	@Test
@@ -64,11 +65,11 @@ public class CrawlerTest {
 		Crawler crawler = new Crawler(testNormal);
 		assertEquals(crawler.getWordCount(), 15);
 		
-		crawler.setParagraphs(testEmpty);
-		assertEquals(crawler.getWordCount(), 0);
+		Crawler crawlerEmpty = new Crawler(testEmpty);
+		assertEquals(crawlerEmpty.getWordCount(), 0);
 		
-		crawler.setParagraphs(testRequest);
-		assertNotEquals(crawler.getWordCount(), 0);
+		Crawler crawlerReq = new Crawler(testRequest);
+		assertNotEquals(crawlerReq.getWordCount(), 0);
 	}
 	
 	@Test
@@ -84,10 +85,10 @@ public class CrawlerTest {
 		Crawler crawler = new Crawler(testNormal);
 		assertEquals(crawler.getPalindromeCount(), 8);
 		
-		crawler.setParagraphs(testEmpty);
-		assertEquals(crawler.getPalindromeCount(), 0);
+		Crawler crawlerEmpty = new Crawler(testEmpty);
+		assertEquals(crawlerEmpty.getPalindromeCount(), 0);
 		
-		crawler.setParagraphs(testRequest);
-		assertNotEquals(crawler.getWordCount(), 0);
+		Crawler crawlerReq = new Crawler(testRequest);
+		assertNotEquals(crawlerReq.getWordCount(), 0);
 	}
 }
