@@ -1,6 +1,7 @@
 package loremipsum;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Crawler {
 
@@ -8,6 +9,7 @@ public class Crawler {
 	public ArrayList<String> phrases;
 	public ArrayList<String> words;
 	public ArrayList<String> palindromes;
+	private HashMap<String, Integer> wordFreqMap;
 
 
 
@@ -17,6 +19,7 @@ public class Crawler {
 		this.phrases = getPhrasesList();
 		this.words = getWordList();
 		this.palindromes = getPalindromeList();
+		this.wordFreqMap = getWordFrequency();
 		
 	}
 
@@ -68,7 +71,7 @@ public class Crawler {
 			for (String word : words) {
 				String wordTrimmed = totalTrim(word);
 				if (!wordTrimmed.isEmpty()) {
-					wordsList.add(word);
+					wordsList.add(word.toLowerCase());
 				}
 			}
 		}
@@ -87,12 +90,22 @@ public class Crawler {
 		return palindromeList;
 	}
 	
+	// Método encargado de almacenar en un mapa la frecuencia de cada palabra
+	private HashMap<String, Integer> getWordFrequency(){
+		HashMap<String, Integer> wordFreqMap = new HashMap<String, Integer>();
+		for (String word : words) {
+			wordFreqMap.compute(word, (key, value) -> (value == null) ? 1 : value + 1);
+		}
+		return wordFreqMap;
+	}
+	
+
+	
 	boolean isPalindrome(String word) {
 		int i = 0;
 		int j = word.length()-1;
-		String lowerCaseWord = word.toLowerCase();
 		while (i<j) {
-			if(lowerCaseWord.charAt(i) != lowerCaseWord.charAt(j)) {
+			if(word.charAt(i) != word.charAt(j)) {
 				return false;
 			};
 			i++;
