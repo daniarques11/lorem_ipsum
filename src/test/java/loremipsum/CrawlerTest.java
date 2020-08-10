@@ -20,10 +20,10 @@ public class CrawlerTest {
 	// Inicializamos el texto que va a servir para testear
 	@BeforeClass
 	public static void init() {
-		testNormal.add("Hola. Caracola hola. Hooh laal lol");
-		testNormal.add("Hi! Palindrdnilap");
-		testNormal.add("     Hi!... Bye");
-		testNormal.add("kayak,wow,level. wow! bye...");
+		testNormal.add("Hola hola hola hola. Caracola hola. Hooh laal lol lol lol");
+		testNormal.add("Hi! Hi? Palindrdnilap hi");
+		testNormal.add("     Hi!... Bye wow");
+		testNormal.add("wow hola kayak,wow,level. wow! hi hi bye...");
 		testNormal.add("     ");
 		testNormal.add(".");
 		
@@ -50,7 +50,7 @@ public class CrawlerTest {
 	public void phrasesCountTest() {
 
 		Crawler crawler = new Crawler(testNormal);
-		assertEquals(crawler.getPhraseCount(), 10);
+		assertEquals(crawler.getPhraseCount(), 11);
 		
 		Crawler crawlerEmpty = new Crawler(testEmpty);
 		assertEquals(crawlerEmpty.getPhraseCount(), 0);
@@ -63,7 +63,7 @@ public class CrawlerTest {
 	public void wordsCountTest() {
 
 		Crawler crawler = new Crawler(testNormal);
-		assertEquals(crawler.getWordCount(), 15);
+		assertEquals(crawler.getWordCount(), 27);
 		
 		Crawler crawlerEmpty = new Crawler(testEmpty);
 		assertEquals(crawlerEmpty.getWordCount(), 0);
@@ -83,8 +83,24 @@ public class CrawlerTest {
 	@Test
 	public void palindromeCountTest() {
 		Crawler crawler = new Crawler(testNormal);
-		assertEquals(crawler.getPalindromeCount(), 8);
+		assertEquals(crawler.getPalindromeCount(), 12);
 		
+		Crawler crawlerEmpty = new Crawler(testEmpty);
+		assertEquals(crawlerEmpty.getPalindromeCount(), 0);
+		
+		Crawler crawlerReq = new Crawler(testRequest);
+		assertNotEquals(crawlerReq.getWordCount(), 0);
+	}
+	
+	@Test
+	public void mostFrequentWordsTest() {
+		Crawler crawler = new Crawler(testNormal);
+		assert(crawler.getMostFrequentWords().get("hola") == 6);
+		assert(crawler.getMostFrequentWords().get("hi") == 6);
+		assert(crawler.getMostFrequentWords().get("wow") == 4);
+		assert(crawler.getMostFrequentWords().get("lol") == 3);
+		assert(crawler.getMostFrequentWords().get("bye") == 2);
+		assertFalse(crawler.getMostFrequentWords().containsKey("level"));
 		Crawler crawlerEmpty = new Crawler(testEmpty);
 		assertEquals(crawlerEmpty.getPalindromeCount(), 0);
 		
