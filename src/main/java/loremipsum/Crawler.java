@@ -31,6 +31,10 @@ public class Crawler {
 		setMostFrequentTuples();
 	}
 
+	public ArrayList<String> getParagraphs(){
+		return paragraphs;
+	}
+	
 	public int getParagraphCount() {
 		int count = 0;
 		for (String paragraph : paragraphs) {
@@ -49,6 +53,10 @@ public class Crawler {
 		return words.size();
 	}
 
+	public ArrayList<String> getPalindromes(){
+		return palindromes;
+	}
+	
 	public int getPalindromeCount() {
 		return palindromes.size();
 	}
@@ -173,7 +181,6 @@ public class Crawler {
 			tupleMap.compute(tuple, (key, value) -> (value == null) ? 1 : value + 1);
 		i++;
 		}
-		System.out.println(tupleMap);
 		this.tupleFreqMap = tupleMap;
 	}
 
